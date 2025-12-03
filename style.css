@@ -7,10 +7,11 @@
   --text-color: white;
   --bg-url:url(./assets/bg-mobile.jpg);
   --stroke-color:rgba(255, 255, 255, 0.5);
-  --surface-color:rgba(255,255, 255, 0.5);
+  --surface-color: rgba(255, 255, 255, 0.1);
   --surface-color-hover:rgba(0,0,0,0.2);
   --highlight-color:rgba(255,255,255,0.2);
   --switch-bg-url:url(./assets/moon-stars.svg);
+  
  
 }
 
@@ -18,14 +19,18 @@
   --text-color:black;
   --bg-url:url(./assets/bg-mobile-light.jpg);
   --stroke-color: rgba(0,0,0,0.5);
-  --surface-color:rgba(0,0,0,0.5);
+  --surface-color:rgba(224, 193, 210, 0.1);
   --surface-color-hover:rgba(0,0,0,0.2);
   --highlight-color:rgba(0,0,0,0.1);
   --switch-bg-url:url(./assets/sun.svg);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+  
 }
 body {
   background: var(--bg-url) no-repeat center / cover;
+  background-attachment: fixed;
   height: 100vh;
+   transition: background 0.3s ease;
 }
 
 body * {
@@ -47,19 +52,33 @@ body * {
   flex-direction: column; /* imagem e texto um embaixo do outro */
   align-items: center;    /* centraliza horizontalmente */
   text-align: center;
-  margin-top: 24px;
-  padding:0 24px;
+  margin-top: 16px;
+  padding: 0 24px;
+  background: var(--surface-color);
+  border-radius: 16px;
+  backdrop-filter: blur(10px); 
+  box-shadow: var(--shadow);
+  
+}
+
+#profile:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 #profile img {
   width: 112px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   border-radius: 50%; /* opcional */
+  border: 3px solid var(--stroke-color);
+}
+
+#profile img:hover {
+  border-color: var(--highlight-color);
 }
 
 #profile p {
   font-weight: 500; 
-  font-size: 16px;
+  font-size: 18px;
   line-height: 24px;
   margin-top: 8px;
 }
@@ -67,7 +86,7 @@ body * {
 #switch {
   position: relative;
   width: 64px;
-  margin: 6px auto;
+  margin: 16px auto;
 }
 
 #switch button{
@@ -81,7 +100,10 @@ body * {
   left: 0;
   z-index: 1;
   transform: translateY(-50%);
-   animation: slide-back .2s;
+  animation: slide-back .2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+   transition: box-shadow 0.2s ease;
+
 
 }
 .light #switch button{
@@ -90,6 +112,7 @@ body * {
 }
 #switch button:hover {
   outline: 8px solid var(--highlight-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -108,8 +131,8 @@ ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 24px 0;
+  gap: 20px;
+  padding: 32px 0;
   
 }
 
@@ -117,20 +140,23 @@ ul li a {
   display: flex;
   align-items: center;
   justify-content: center;
- padding: 16px 24px;
+ padding: 18px 24px;
  background: var(--surface-color);
  border: 1px solid var(--stroke-color);
  border-radius: 8px;
  backdrop-filter: blur(4px);
  text-decoration: none;
  font-weight: 500;
- transition:background 0.2s ;
+ transition: background 0.2s, transform 0.2s ease;
 }
+
+
 
 /*selector*/
 ul li a:hover {
   background:rgba(255,255, 255, 0.5) ;
   border: 1.5px solid var(--text-color);
+   transform: scale(1.05);
 }
 /*icons links social*/
 
@@ -157,21 +183,22 @@ ul li a:hover {
 }
 
 footer {
-  padding: 24px;
+  padding: 32px;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 /* media queries*/
 
 @media (min-width:700px) {
   :root {
-    --bg-url: url(./assets/bg-desktop.jpg);
+    --bg-url: url(./assets/bg-desktopblue.png);
   }
   .light {
-    --bg-url:url(./assets/bg-desktop-light.jpg);
+    --bg-url:url(./assets/bg-desktoplilas.png);
   }
 }
+
 
 /* animation */
 @keyframes slide-in {
